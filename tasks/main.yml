@@ -52,18 +52,5 @@
       [Install]
       WantedBy=multi-user.target
 
-# =================================================
-# Reload SystemD
-# =================================================
-- name: Reload systemd for Node Exporter
-  systemd:
-    daemon_reload: yes
-
-# =================================================
-# Enable Node Exporter When Server Boots Up
-# =================================================
-- name: Enable and start Node Exporter
-  systemd:
-    name: node_exporter
-    enabled: yes
-    state: started
+  notify:
+    - restart_node_exporter
